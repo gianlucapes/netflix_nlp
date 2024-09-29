@@ -25,7 +25,7 @@ class BlogSpider(scrapy.Spider):
         soup = BeautifulSoup(div_html).find('div')
         
         jutsu_type=""
-
+        #get classification of jutsu
         if soup.find('aside'):
             aside= soup.find('aside')
             for cell in aside.findAll('div',{'class':'pi-data'}):
@@ -36,6 +36,7 @@ class BlogSpider(scrapy.Spider):
         soup.find('aside').decompose()
 
         jutsu_description = soup.text.strip()
+        #get description cutting Trivia  section
         jutsu_description = jutsu_description.split('Trivia')[0].strip()
         
         return {
